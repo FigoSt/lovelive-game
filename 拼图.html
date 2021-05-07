@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="main.css" rel="stylesheet">
+  <title>拼图</title>
+  <script src="jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+  <div class="main">
+    <div class="content">
+      <div class="game_box game2">
+        <!-- 问题图 -->
+        <div class="puzzle">
+          <div id="img">
+            <table cellpadding=0px cellspacing=5px>
+              <tbody>
+                <tr>
+                  <td class="img8" id="0" trueid="8"
+                    style="background-image: url(&quot;https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/picture25.png&quot;); height: 128px; width: 128px; position: absolute; left: 0px; top: 0px;">
+                  </td>
+                  <td class="img3" id="1" trueid="3"
+                    style="background-image: url(&quot;https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/picture25.png&quot;); height: 128px; width: 128px; position: absolute; left: 133px; top: 0px;">
+                  </td>
+                  <td class="img6" id="2" trueid="6"
+                    style="background-image: url(&quot;https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/picture25.png&quot;); height: 128px; width: 128px; position: absolute; left: 266px; top: 0px;">
+                  </td>
+                </tr>
+                <tr>
+                  <td class="img1" id="3" trueid="1"
+                    style="background-image: url(&quot;https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/picture25.png&quot;); height: 128px; width: 128px; position: absolute; left: 0px; top: 133px;">
+                  </td>
+                  <td class="img2" id="4" trueid="2"
+                    style="background-image: url(&quot;https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/picture25.png&quot;); height: 128px; width: 128px; position: absolute; left: 133px; top: 133px;">
+                  </td>
+                  <td class="img5" id="5" trueid="5"
+                    style="background-image: url(&quot;https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/picture25.png&quot;); height: 128px; width: 128px; position: absolute; left: 266px; top: 133px;">
+                  </td>
+                </tr>
+                <tr>
+                  <td class="img0" id="6" trueid="0"
+                    style="background-image: url(&quot;https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/picture25.png&quot;); height: 128px; width: 128px; position: absolute; left: 0px; top: 266px;">
+                  </td>
+                  <td class="img4" id="7" trueid="4"
+                    style="background-image: url(&quot;https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/picture25.png&quot;); height: 128px; width: 128px; position: absolute; left: 133px; top: 266px;">
+                  </td>
+                  <td class="img7" id="8" trueid="7"
+                    style="background-image: url(&quot;https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/picture25.png&quot;); height: 128px; width: 128px; position: absolute; left: 266px; top: 266px;">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- 原图 -->
+        <div class="picture">
+          <img src="https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/minipic25.png" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+<script>
+  //拼图成功后的提示。
+  var successFunction = function () {
+    setTimeout(function () {
+      // console.log(2);
+      alert('拼图成功')
+    }, 200)
+    // addStore();
+  };
+
+  getGame();
+  //获取游戏信息
+  var codeNum, gameName;
+  function getGame() {
+    codeNum = parseInt(Math.random() * 27);
+    var mainImge =
+      "https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/picture" +
+      codeNum +
+      ".png";
+    $(".picture img").attr(
+      "src",
+      "https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/minipic" +
+      codeNum +
+      ".png"
+    );
+    puzzle(
+      "https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/picture" +
+      codeNum +
+      ".png"
+    );
+  }
+
+
+
+
+  function puzzle(mainImge) {
+    var backgroundImge = "";
+    var mainImge = mainImge;
+    // var mainImge = "images/picture"+2+".png";
+    var td = [];
+    td = document.getElementsByTagName("td");
+    var Margin = parseInt(
+      document.getElementById("img").currentStyle
+        ? parseInt(screen.availWidth) * 0.31
+        : window.getComputedStyle(document.getElementById("img"), null)[
+        "marginLeft"
+        ]
+    );
+    // alert(Margin);
+    var i;
+    var used = [];
+    var clock;
+    var flashClock;
+    var flashClock2;
+    var stop = 0;
+
+    var makeTD = {
+      leftTop: 0,
+      rightButton: 0,
+    };
+    var makeTable = [];
+    function get_Random(maxNum) {
+      return Math.floor(Math.random() * maxNum);
+    }
+
+    function getCss(elementObj, key) {
+      return elementObj.currentStyle
+        ? elementObj.currentStyle[key]
+        : window.getComputedStyle(elementObj, false)[key];
+    }
+
+    function contains(arr, obj) {
+      var i = arr.length;
+      while (i--) {
+        if (arr[i] === obj) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    function getOverlay(_hover) {
+      var _Hover = new Object();
+      _Hover.middleX =
+        parseInt(getCss(_hover, "left")) +
+        parseInt(getCss(_hover, "width")) / 2;
+      _Hover.middleY =
+        parseInt(getCss(_hover, "top")) +
+        parseInt(getCss(_hover, "height")) / 2;
+      for (i = 0; i < makeTable.length; i++) {
+        if (
+          makeTable[i].left < _Hover.middleX &&
+          _Hover.middleX < makeTable[i].right &&
+          makeTable[i].top < _Hover.middleY &&
+          _Hover.middleY < makeTable[i].bottom
+        ) {
+          return i;
+        }
+      }
+    }
+
+    function isWin() {
+      for (
+        i = 0, td = document.getElementsByTagName("td");
+        i < td.length;
+        i++
+      ) {
+        if (td[i].getAttribute("id") != td[i].className.slice(3)) {
+          return false;
+        }
+      }
+      return true;
+    }
+
+    function initTable(_col, _row) {
+      //添加图片
+      // document.getElementsByTagName("body")[0].style.backgroundImage = "url(" + backgroundImge + ")";
+      for (i = 0; i < td.length; i++) {
+        td[i].style.backgroundImage = "url(" + mainImge + ")";
+      }
+      //
+      _col = _col ? _col : 3;
+      _row = _row ? _row : 3;
+      var table_cellSpacing = parseInt(
+        document
+          .getElementsByTagName("table")[0]
+          .getAttribute("cellspacing")
+      );
+      //实现自定义数量，需要增加创建td,和*class数组
+      for (
+        i = 0, td = document.getElementsByTagName("td");
+        i < td.length;
+        i++
+      ) {
+        td[i].setAttribute("class", "img" + i);
+        td[i].setAttribute("id", i);
+        td[i].style.height = "128px";
+        td[i].style.width = "128px";
+        td[i].style.position = "absolute";
+        td[i].style.left =
+          (i % _row) * (128 + table_cellSpacing) +
+          (parseInt((i % _row) / _row) + 1) * Margin +
+          "px";
+        td[i].style.top =
+          parseInt(i / _col) * (128 + table_cellSpacing) + "px";
+        // td[i].style.top = i % _col * (128 + table_cellSpacing) + (parseInt(i % _col / _col) + 1) * Margin + "px";
+
+        //确定td位置
+        makeTable[i] = new Object();
+        makeTable[i].left = parseInt(td[i].style.left);
+        makeTable[i].top = parseInt(td[i].style.top);
+
+        makeTable[i].right =
+          parseInt(td[i].style.left) + parseInt(td[i].style.width);
+        makeTable[i].bottom =
+          parseInt(td[i].style.top) + parseInt(td[i].style.height);
+
+        makeTable[i].middleX = (makeTable[i].left + makeTable[i].right) / 2;
+        makeTable[i].middleY = (makeTable[i].top + makeTable[i].bottom) / 2;
+      }
+    }
+
+    function random_disorder() {
+      initTable();
+      used = [];
+
+      for (
+        i = 0, td = document.getElementsByTagName("td");
+        i < td.length;
+        i++
+      ) {
+        //打乱拼图块:设置td class（包含背景图定位），id为当前td位置，class，trueid为实际位置
+        var class_id;
+        do {
+          class_id = get_Random(9);
+          if (used.length == 9) break;
+        } while (contains(used, class_id));
+
+        td[i].setAttribute("class", "img" + class_id);
+        td[i].setAttribute("trueId", class_id);
+
+        used[i] = class_id;
+      }
+      // console.log(stop);
+      if (stop >= 2) {
+        clearInterval(clock);
+        stop = 0;
+      } else stop++;
+    }
+
+    function drag(obj, mouseX, mouseY, successAction) {
+      obj.style.zIndex = "2";
+      var templateObj = {
+        left: getCss(obj, "left"),
+        top: getCss(obj, "top"),
+        currentX: mouseX,
+        currentY: mouseY,
+        flag: true,
+      };
+
+      document.onmousemove = function (event) {
+        var e = event ? event : window.event;
+        if (templateObj.flag) {
+          var nowX = e.clientX,
+            nowY = e.clientY;
+          var disX = nowX - templateObj.currentX,
+            disY = nowY - templateObj.currentY;
+          obj.style.left = parseInt(templateObj.left) + disX + "px";
+          obj.style.top = parseInt(templateObj.top) + disY + "px";
+          if (event.preventDefault) {
+            event.preventDefault();
+          }
+          return false;
+        }
+
+        if (typeof callback == "function") {
+          callback(
+            parseInt(templateObj.left) + disX,
+            parseInt(templateObj.top) + disY
+          );
+        }
+      };
+
+      for (i = 0; i < td.length; i++) {
+        td[i].onmouseup = function () {
+          obj.style.zIndex = "0";
+          templateObj.flag = false;
+
+          var oLI = getOverlay(obj);
+          // console.log(oLI);
+
+          var OverLay = makeTable[oLI];
+          if (oLI == undefined) {
+            obj.style.left = makeTable[obj.id].left + "px";
+            obj.style.top = makeTable[obj.id].top + "px";
+            obj.style.zIndex = "0";
+          } else {
+            if (getCss(obj, "left") !== "auto") {
+              //表格定位
+              obj.style.left = makeTable[obj.id].left + "px";
+              //图片定位（交换class）
+              var oldClass = obj.getAttribute("class");
+              //alert(oLI);
+              obj.setAttribute(
+                "class",
+                document
+                  .getElementById(oLI.toString())
+                  .getAttribute("class")
+              );
+              document.getElementById(oLI).setAttribute("class", oldClass);
+            }
+            if (getCss(obj, "top") !== "auto") {
+              //表格定位
+              obj.style.top = makeTable[obj.id].top + "px";
+              // console.log(makeTable[obj.id].top);
+            }
+          }
+
+          //addTitle();
+          if (isWin()) {
+            successAction();
+          }
+        };
+      }
+    }
+
+    random_disorder();
+    initTable(td, initTable);
+    for (i = 0; i < td.length; i++) {
+      td[i].addEventListener("mousedown", function () {
+        //拖拽
+        drag(event.target, event.clientX, event.clientY, successFunction);
+      });
+    }
+    clock = setInterval(random_disorder(), 40);
+  }
+</script>
+
+</html>

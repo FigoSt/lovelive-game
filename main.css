@@ -1,0 +1,979 @@
+@charset "UTF-8";
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+
+body {
+  line-height: 1;
+}
+
+:focus {
+  outline: 1;
+}
+
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary {
+  display: block;
+}
+
+ul, li {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+a {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+  text-decoration: none;
+}
+
+ins {
+  background-color: #ff9;
+  color: #000;
+  text-decoration: none;
+}
+
+mark {
+  background-color: #ff9;
+  color: #000;
+  font-style: italic;
+  font-weight: bold;
+}
+
+del {
+  text-decoration: line-through;
+}
+
+abbr[title], dfn[title] {
+  border-bottom: 1px dotted #000;
+  cursor: help;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #cccccc;
+  margin: 1em 0;
+  padding: 0;
+}
+
+input, select {
+  vertical-align: middle;
+}
+
+@-webkit-keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes tada {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  10%, 20% {
+    -webkit-transform: scale(0.9) rotate(-9deg);
+            transform: scale(0.9) rotate(-9deg);
+  }
+  30%, 50%, 70%, 90% {
+    -webkit-transform: scale(1) rotate(9deg);
+            transform: scale(1) rotate(9deg);
+  }
+  40%, 60%, 80% {
+    -webkit-transform: scale(1) rotate(-9deg);
+            transform: scale(1) rotate(-9deg);
+  }
+  100% {
+    -webkit-transform: scale(1) rotate(0);
+            transform: scale(1) rotate(0);
+  }
+}
+
+@keyframes tada {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  10%, 20% {
+    -webkit-transform: scale(0.9) rotate(-9deg);
+            transform: scale(0.9) rotate(-9deg);
+  }
+  30%, 50%, 70%, 90% {
+    -webkit-transform: scale(1) rotate(9deg);
+            transform: scale(1) rotate(9deg);
+  }
+  40%, 60%, 80% {
+    -webkit-transform: scale(1) rotate(-9deg);
+            transform: scale(1) rotate(-9deg);
+  }
+  100% {
+    -webkit-transform: scale(1) rotate(0);
+            transform: scale(1) rotate(0);
+  }
+}
+
+body {
+  position: relative;
+  height: 100%;
+}
+
+.loading {
+  position: fixed;
+  z-index: 999;
+  background-color: #000;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+}
+
+.loading .load_box {
+  position: absolute;
+  width: 100%;
+  left: 100%;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.loading .load_logo {
+  width: 100%;
+  height: 93px;
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/logo.png?05") top center no-repeat;
+}
+
+.loading .persent {
+  width: 100%;
+  text-align: center;
+  color: #e93398;
+  font-size: 40px;
+  font-weight: bold;
+  margin: 25px 0px;
+}
+
+.loading .bar {
+  width: 0%;
+  height: 4px;
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/nav_bg.png?05") top center no-repeat;
+}
+
+.main {
+  height: 1100px;
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/bg.jpg?05") top center no-repeat;
+  position: relative;
+  overflow: hidden;
+}
+
+.main .top {
+  position: absolute;
+  width: 100%;
+  height: 80px;
+  background: url(https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/nav_bg.png) bottom center no-repeat #fff;
+  z-index: 3;
+}
+
+.main .top .logo {
+  position: absolute;
+  top: 0px;
+  left: 42px;
+  width: 183px;
+  height: 93px;
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/logo.png?05") top center no-repeat;
+}
+
+.main .top .userMes {
+  position: absolute;
+  top: 45px;
+  left: 240px;
+}
+
+.main .top .userMes .isLog {
+  font-size: 18px;
+  color: #000;
+  display: none;
+}
+
+.main .top .userMes .noLog {
+  font-size: 18px;
+  color: #000;
+}
+
+.main .login_box {
+  position: absolute;
+  top: 19px;
+  right: 75px;
+  clear: both;
+  overflow: hidden;
+}
+
+.main .login_box a {
+  float: left;
+  width: 46px;
+  height: 46px;
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/home.png?05") top center no-repeat;
+  margin-left: 29px;
+}
+
+.main .login_box a.login {
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/login.png?05") top center no-repeat;
+}
+
+.main .login_box a.loginOut {
+  width: 43px;
+  height: 49px;
+  margin-top: 4px;
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/loginOut.png?05") top center no-repeat;
+  display: none;
+}
+
+.main .login_box a.isLogin {
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/islogin.png?05") top center no-repeat;
+}
+
+.main .content {
+  width: 1200px;
+  height: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+
+.main .side_left {
+  width: 221px;
+  height: 886px;
+  position: absolute;
+  top: 114px;
+  left: 0px;
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/side_left.png?05") top center no-repeat;
+}
+
+.main .side_left .side_active {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 0%;
+  -webkit-transition: all 1s;
+  transition: all 1s;
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/side_bg.png") bottom center no-repeat;
+}
+
+.main .tips {
+  width: 252px;
+  height: 844px;
+  position: absolute;
+  top: 127px;
+  left: 240px;
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/tips.png?05") top center no-repeat;
+  z-index: 3;
+}
+
+.main .tips .grade {
+  width: 160px;
+  font-size: 21px;
+  color: #333;
+  position: absolute;
+  bottom: 0px;
+  left: 160px;
+}
+
+.main .tips .grade span {
+  padding-left: 20px;
+}
+
+.main .tips .gift {
+  position: absolute;
+  width: 77px;
+  height: 41px;
+  top: 0px;
+  left: 150px;
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/gift.png?05") top center no-repeat;
+  cursor: pointer;
+}
+
+.main .side_right {
+  position: absolute;
+  top: 320px;
+  right: 0px;
+  text-align: right;
+}
+
+.main .side_right .box1, .main .side_right .box2, .main .side_right .box3, .main .side_right .box4 {
+  display: block;
+  margin-top: 25px;
+  width: 137px;
+  height: 121px;
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/box1.png?05") top center no-repeat;
+  -webkit-transition: all .5s ease;
+  transition: all .5s ease;
+}
+
+.main .side_right .box1:hover, .main .side_right .box2:hover, .main .side_right .box3:hover, .main .side_right .box4:hover {
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/box1_on.png?05") top center no-repeat;
+}
+
+.main .side_right .box1.active, .main .side_right .active.box2, .main .side_right .active.box3, .main .side_right .active.box4 {
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/box1_on.png?05") top center no-repeat;
+}
+
+.main .side_right .box2 {
+  top: px;
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/box2.png?05") top center no-repeat;
+}
+
+.main .side_right .box2:hover {
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/box2_on.png?05") top center no-repeat;
+}
+
+.main .side_right .box2.active {
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/box2_on.png?05") top center no-repeat;
+}
+
+.main .side_right .box3 {
+  top: 628px;
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/box3.png?05") top center no-repeat;
+}
+
+.main .side_right .box3:hover {
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/box3_on.png?05") top center no-repeat;
+}
+
+.main .side_right .box3.active {
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/box3_on.png?05") top center no-repeat;
+}
+
+.main .side_right .box4 {
+  top: 770px;
+  display: none;
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/box4.png?05") top center no-repeat;
+}
+
+.main .side_right .box4:hover {
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/box4_on.png?05") top center no-repeat;
+}
+
+.main .side_right .box4.active {
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/box4_on.png?05") top center no-repeat;
+}
+
+.main .side_right .rule {
+  display: inline-block;
+  margin-top: 20px;
+  width: 97px;
+  height: 34px;
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/rule.png?05") top center no-repeat;
+}
+
+.main .slogan {
+  position: absolute;
+  top: 650px;
+  left: 320px;
+  width: 783px;
+  height: 327px;
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/slogan.png?05") top center no-repeat;
+  z-index: 3;
+}
+
+.main .p1 {
+  position: absolute;
+  bottom: 60px;
+  left: 440px;
+  width: 483px;
+  height: 928px;
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/r1.png?05") top center no-repeat;
+  z-index: 2;
+}
+
+.main .p2 {
+  position: absolute;
+  bottom: 0px;
+  left: 110px;
+  width: 505px;
+  height: 988px;
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/r2.png?05") top center no-repeat;
+}
+
+.main .p3 {
+  position: absolute;
+  bottom: 0px;
+  right: -110px;
+  width: 409px;
+  height: 956px;
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/r3.png?05") top center no-repeat;
+}
+
+.main .signin_box {
+  position: absolute;
+  top: 230px;
+  left: 200px;
+  width: 1042px;
+  height: 718px;
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/calendar.png?05") top center no-repeat;
+}
+
+.main .calendar {
+  width: 660px;
+  position: absolute;
+  left: 250px;
+  top: 30px;
+}
+
+.main .week-hd {
+  overflow: hidden;
+  clear: both;
+}
+
+.main .week-hd li {
+  float: left;
+  width: 92px;
+  height: 30px;
+  font-weight: bold;
+  color: #cab2ce;
+  text-align: center;
+  margin: 1px;
+}
+
+.main .week {
+  overflow: hidden;
+  clear: both;
+}
+
+.main .week.unOpen li {
+  border: solid 1px #bebebe;
+}
+
+.main .week.unOpen li.weekend {
+  background-color: #bebebe;
+}
+
+.main .week li {
+  float: left;
+  width: 80px;
+  height: 90px;
+  padding-right: 10px;
+  line-height: 40px;
+  text-align: right;
+  font-weight: bold;
+  color: #8e8e8e;
+  border: solid 1px #fce893;
+  background-color: #fff;
+  margin: 1px;
+  font-size: 25px;
+}
+
+.main .week li.sign {
+  background: url(https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/sign.png) bottom right no-repeat #fff;
+}
+
+.main .week li.unsign {
+  background: url(https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/unsign.png) bottom right no-repeat #fff;
+}
+
+.main .week li.weekend {
+  background-color: #fbe482;
+}
+
+.main .week li.on {
+  cursor: pointer;
+  position: relative;
+  color: #000;
+}
+
+.main .week li.on::before {
+  content: "签到";
+  position: absolute;
+  bottom: 10px;
+  left: 0px;
+  width: 100%;
+  text-align: center;
+  font-size: 20px;
+}
+
+.main .game_box {
+  width: 1045px;
+  height: 656px;
+  position: absolute;
+  left: 210px;
+  top: 230px;
+  z-index: 4;
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/game.png?05") top center no-repeat;
+}
+
+.main .game_box.game2 {
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/game2.png?05") top center no-repeat;
+}
+
+.main .game_box.game3 {
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/game3.png?05") top center no-repeat;
+}
+
+.main .game_box .img_mask {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background: none;
+  z-index: 2;
+  display: none;
+}
+
+.main .game_box .eliminate {
+  position: absolute;
+  width: 610px;
+  top: 18px;
+  left: 50px;
+  clear: both;
+  overflow: hidden;
+}
+
+.main .game_box .eliminate .eli_box {
+  float: left;
+  width: 152px;
+  height: 155px;
+  position: relative;
+  cursor: pointer;
+  -webkit-perspective: 1000px;
+          perspective: 1000px;
+}
+
+.main .game_box .eliminate .eli_box img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  -webkit-transition: .5s ease-out;
+  transition: .5s ease-out;
+}
+
+.main .game_box .eliminate .eli_box img.card_img {
+  -webkit-transform: rotateY(-180deg);
+          transform: rotateY(-180deg);
+}
+
+.main .game_box .eliminate .eli_box img.card_cover {
+  z-index: 2;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+
+.main .game_box .eliminate .eli_box img.active1 {
+  -webkit-transform: rotateY(0deg);
+          transform: rotateY(0deg);
+}
+
+.main .game_box .eliminate .eli_box img.active2 {
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+}
+
+.main .game_box .puzzle {
+  position: absolute;
+  width: 392px;
+  height: 392px;
+  background-color: #fbe482;
+  top: 40px;
+  left: 260px;
+}
+
+.main .game_box .puzzle #img {
+  width: 100%;
+  height: 100%;
+}
+
+.main .game_box .puzzle table {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.main .game_box .puzzle table td {
+  width: 128px;
+  height: 128px;
+  background-repeat: no-repeat;
+}
+
+.main .game_box .puzzle table td.img0 {
+  background-position: 0px 0px;
+}
+
+.main .game_box .puzzle table td.img1 {
+  background-position: -128px 0px;
+}
+
+.main .game_box .puzzle table td.img2 {
+  background-position: -256px 0px;
+}
+
+.main .game_box .puzzle table td.img3 {
+  background-position: 0px -128px;
+}
+
+.main .game_box .puzzle table td.img4 {
+  background-position: -128px -128px;
+}
+
+.main .game_box .puzzle table td.img5 {
+  background-position: -256px -128px;
+}
+
+.main .game_box .puzzle table td.img6 {
+  background-position: 0px -256px;
+}
+
+.main .game_box .puzzle table td.img7 {
+  background-position: -128px -256px;
+}
+
+.main .game_box .puzzle table td.img8 {
+  background-position: -256px -256px;
+}
+
+.main .game_box .picture {
+  position: absolute;
+  top: 410px;
+  left: 27px;
+  width: 261px;
+  height: 285px;
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/picture.png?05") top center no-repeat;
+}
+
+.main .game_box .picture img {
+  width: 195px;
+  height: 195px;
+  -webkit-transform: rotate(-12deg);
+          transform: rotate(-12deg);
+  position: absolute;
+  top: 30px;
+  left: 31px;
+}
+
+.main .game_box .que_img {
+  position: absolute;
+  top: 33px;
+  left: 66px;
+  width: 591px;
+  height: 592px;
+}
+
+.main .game_box .q_box1 {
+  display: none;
+}
+
+.main .game_box .q_box2 {
+  display: none;
+}
+
+.main .game_box .q_box3 {
+  display: none;
+}
+
+.main .game_box .que_btn {
+  position: absolute;
+  top: -5px;
+  left: 720px;
+  width: 278px;
+  height: 258px;
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/btn01.png?05") top center no-repeat;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-flex-line-pack: justify;
+      align-content: space-between;
+}
+
+.main .game_box .que_btn.que_btn1 {
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/btn01.png?05") top center no-repeat;
+}
+
+.main .game_box .que_btn.que_btn2 {
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/btn02.png?05") top center no-repeat;
+}
+
+.main .game_box .que_btn.que_btn3 {
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/btn03.png?05") top center no-repeat;
+}
+
+.main .game_box .que_btn a {
+  width: 76px;
+  height: 76px;
+  position: relative;
+}
+
+.main .game_box .que_btn a.right::after {
+  position: absolute;
+  z-index: 2;
+  content: '';
+  width: 141px;
+  height: 102px;
+  left: -28px;
+  top: -24px;
+  background: url(https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/binggo.png) 0 0 no-repeat;
+}
+
+.main .game_box .que_btn a.wrong::after {
+  position: absolute;
+  z-index: 2;
+  content: '';
+  width: 44px;
+  height: 21px;
+  right: -18px;
+  bottom: 0px;
+  background: url(https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/wrong.png) 0 0 no-repeat;
+}
+
+.main .video_box {
+  width: 1056px;
+  height: 655px;
+  position: absolute;
+  left: 210px;
+  top: 230px;
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/video.png?05") top center no-repeat;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding-left: 40px;
+  padding-top: 15px;
+}
+
+.main .video_box .myvideo {
+  width: 947px;
+  height: 492px;
+  background-color: #000;
+  border-radius: 10px;
+}
+
+.main .video_box .video_mask {
+  position: absolute;
+  top: 15px;
+  left: 40px;
+  width: 947px;
+  height: 492px;
+  background-color: rgba(0, 0, 0, 0.8);
+  cursor: pointer;
+  -webkit-transition: all linear .3s;
+  transition: all linear .3s;
+  text-align: center;
+  line-height: 592px;
+  color: #fff;
+  font-size: 20px;
+  overflow: hidden;
+}
+
+.main .video_box .video_mask span {
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  width: 298px;
+  height: 197px;
+  margin-left: -149px;
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/video_btn.png?05") top center no-repeat;
+}
+
+.main .video_box .video_title {
+  margin-top: 10px;
+}
+
+.main .video_box .video_title p {
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px;
+  background-color: #e93398;
+  color: #fbe482;
+}
+
+.main .video_box .video_btn {
+  width: 590px;
+  height: 70px;
+  position: relative;
+  margin-top: 65px;
+  padding-left: 30px;
+}
+
+.main .video_box .video_btn .swiper-container {
+  overflow: hidden;
+}
+
+.main .video_box .video_btn .swiper-slide {
+  cursor: pointer;
+}
+
+.main .video_box .video_btn .swiper-slide::after {
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: 6px;
+  width: 27px;
+  height: 20px;
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/new.png?05") top center no-repeat;
+  display: none;
+}
+
+.main .video_box .video_btn .swiper-slide.new::after {
+  display: block;
+}
+
+.main .video_box .video_btn .swiper-slide img {
+  border-radius: 10px;
+}
+
+.main .video_box .video_btn .swiper-next, .main .video_box .video_btn .swiper-prev {
+  position: absolute;
+  top: 0px;
+  right: -20px;
+  width: 13px;
+  height: 65px;
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/right.png?05") top center no-repeat;
+  cursor: pointer;
+}
+
+.main .video_box .video_btn .swiper-next.swiper-button-disabled, .main .video_box .video_btn .swiper-button-disabled.swiper-prev {
+  opacity: .5;
+  cursor: default;
+}
+
+.main .video_box .video_btn .swiper-prev {
+  right: auto;
+  left: 0px;
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/left.png?05") top center no-repeat;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0px;
+  height: 69px;
+  padding-top: 30px;
+  width: 100%;
+  background-color: #e93398;
+  text-align: center;
+  z-index: 4;
+}
+
+.footer p {
+  font-size: 13px;
+  color: #fff;
+  line-height: 20px;
+}
+
+.sign_mask, .rule_mask, .prise_mask, .prise_mask_succ {
+  display: none;
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-animation: fade .3s forwards;
+          animation: fade .3s forwards;
+}
+
+.sign_mask .mask, .rule_mask .mask, .prise_mask .mask, .prise_mask_succ .mask {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.sign_mask .sign_box, .rule_mask .sign_box, .prise_mask .sign_box, .prise_mask_succ .sign_box {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  width: 1139px;
+  height: 626px;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.sign_mask .close_btn, .rule_mask .close_btn, .prise_mask .close_btn, .prise_mask_succ .close_btn {
+  position: absolute;
+  width: 46px;
+  height: 46px;
+  top: 0px;
+  right: -56px;
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/close_btn.png?05") top center no-repeat;
+}
+
+.rule_mask .rule_box {
+  width: 894px;
+  height: 486px;
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/rule_bg.png?05") top center no-repeat;
+}
+
+.prise_mask .prise_box, .prise_mask_succ .prise_box {
+  width: 606px;
+  height: 486px;
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/prise_off.png?05") top center no-repeat;
+}
+
+.prise_mask .code_box, .prise_mask_succ .code_box {
+  position: absolute;
+  top: 210px;
+  left: 210px;
+}
+
+.prise_mask .code_box p, .prise_mask_succ .code_box p {
+  font-size: 20px;
+  color: #000;
+  line-height: 30px;
+}
+
+.prise_mask_succ .prise_box {
+  width: 606px;
+  height: 486px;
+  background: url("https://static.web.sdo.com/jijiamobile/pic/llas/act/20210319Task/prise_on.png?05") top center no-repeat;
+}
